@@ -6,12 +6,22 @@ service CalculatorService {
     rpc GetCalculatorWithData(GetCalculatorWithDataRequest) returns (GetCalculatorWithDataResponse);
     rpc GetCalculatorWithDataBatch(GetCalculatorWithDataBatchRequest) returns (GetCalculatorWithDataBatchResponse);
     rpc GetCalculatorWithoutData(GetCalculatorWithoutDataRequest) returns (GetCalculatorWithoutDataResponse);
+    rpc GetCalculatorWithIds(GetCalculatorWithIdsRequest) returns (GetCalculatorWithIdsResponse);
 }
 
 service DetailedInfoService {
     rpc GetDetailedLocation(GetDetailedLocationRequest) returns (GetDetailedLocationResponse);
     rpc GetDetailedTerminal(GetDetailedTerminalRequest) returns (GetDetailedTerminalResponse);
     rpc GetDetailedDestination(GetDetailedDestinationRequest) returns (GetDetailedDestinationResponse);
+    rpc GetDetailedFeeType(GetDetailedFeeTypeRequest) returns (GetDetailedFeeTypeResponse);
+}
+
+message GetDetailedFeeTypeRequest{
+    int32 id = 1;
+}
+message GetDetailedFeeTypeResponse{
+    string auction = 1;
+    string fee_type = 2;
 }
 
 message GetDetailedLocationRequest {
@@ -52,6 +62,15 @@ message GetCalculatorWithDataRequest {
   string location = 6;
 }
 
+message GetCalculatorWithIdsRequest {
+    int32 price = 1;
+    string auction = 2;
+    optional int32 fee_type_id = 3;
+    string vehicle_type = 4;
+    optional int32 destination_id = 5;
+    optional int32 location_id = 6;
+}
+
 message GetCalculatorBatchRequest {
   GetCalculatorWithDataRequest data = 1;
   string lot_id = 2;
@@ -71,6 +90,27 @@ message GetCalculatorWithDataResponse {
   CalculatorOut data = 1;
   string message = 2;
   bool success = 3;
+}
+
+message GetCalculatorWithIdsResponse {
+    CalculatorOut calculator = 1;
+    Location location = 2;
+    string terminal_name = 3;
+    string destination_name = 4;
+    FeeType fee_type = 5;
+}
+
+message Location {
+    string name = 1;
+    string city = 2;
+    string state = 3;
+    string postal_code = 4;
+    string email = 5;
+}
+
+message FeeType{
+    string auction = 1;
+    string fee_type = 2;
 }
 
 message GetCalculatorWithoutDataResponse {
