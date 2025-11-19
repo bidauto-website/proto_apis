@@ -5,8 +5,42 @@ package calculator.v1;
 service CalculatorService {
     rpc GetCalculatorWithData(GetCalculatorWithDataRequest) returns (GetCalculatorWithDataResponse);
     rpc GetCalculatorWithDataBatch(GetCalculatorWithDataBatchRequest) returns (GetCalculatorWithDataBatchResponse);
-
     rpc GetCalculatorWithoutData(GetCalculatorWithoutDataRequest) returns (GetCalculatorWithoutDataResponse);
+}
+
+service DetailedInfoService {
+    rpc GetDetailedLocation(GetDetailedLocationRequest) returns (GetDetailedLocationResponse);
+    rpc GetDetailedTerminal(GetDetailedTerminalRequest) returns (GetDetailedTerminalResponse);
+    rpc GetDetailedDestination(GetDetailedDestinationRequest) returns (GetDetailedDestinationResponse);
+}
+
+message GetDetailedLocationRequest {
+    int32 id = 1;
+}
+
+message GetDetailedLocationResponse {
+    string name = 1;
+    string city = 2;
+    string state = 3;
+    string postal_code = 4;
+    string email = 5;
+}
+
+message GetDetailedTerminalRequest {
+    int32 id = 1;
+}
+
+message GetDetailedTerminalResponse {
+    string name = 1;
+}
+
+message GetDetailedDestinationRequest {
+    int32 id = 1;
+}
+
+message GetDetailedDestinationResponse {
+    string name = 1;
+    bool is_default = 2;
 }
 
 message GetCalculatorWithDataRequest {
@@ -112,3 +146,4 @@ message CalculatorOut {
   DefaultCalculator calculator = 1;
   EUCalculator eu_calculator = 2;
 }
+
