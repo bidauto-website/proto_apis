@@ -20,5 +20,15 @@ message GetUserResponse{
     bool is_active = 7;
     bool phone_verified = 8;
     bool email_verified = 9;
+
+    Address address = 10;
+}
+
+message Address {
+  string country = 1;
+  string state = 2;
+  int32 zip_code = 3;
+  string city = 4;
+  string address = 5;
 }
 
